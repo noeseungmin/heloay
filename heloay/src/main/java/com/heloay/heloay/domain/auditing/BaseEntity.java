@@ -1,4 +1,4 @@
-package com.heloay.heloay.domain;
+package com.heloay.heloay.domain.auditing;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedBy;
@@ -12,7 +12,7 @@ import javax.persistence.MappedSuperclass;
 @Getter
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
-public class BaseEntity extends BaseTimeEntity{
+public class BaseEntity extends BaseTimeEntity {
 
     @CreatedBy
     @Column(nullable = false, updatable = false, length = 100)

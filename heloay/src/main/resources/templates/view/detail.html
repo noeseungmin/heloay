@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Win min">
+    <title>게시판 페이지</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+<header th:replace="header :: header">
+    헤더삽입부
+</header>
+<main>
+    <div class="container">
+        <div class="row mb-3 justify-content-md-center">
+            <div class="row g-5">
+                <section class="col-md-3 col-lg-3 order-md-last">
+
+                    <p><span>평점</span></p>
+                    <p><a href="mailto:nowinmin96@gmail.com">win@mail.com</a></p>
+                    <p>
+                        <time datetime="2022-01-30T03:12:36">2022-01-30 03:12:36</time>
+                    </p>
+                    <p><span>#거미</span></p>
+
+                </section>
+                <article class="col-md-9 col-lg-9">
+                    <div class="card mb-3" style=" width: 100%;">
+                        <div class="row mb-3">
+                            <div class="col-md-5">
+                                <img src="..." class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-body">
+                                    <h5 class="card-title">제목입니다.</h5>
+                                    <p class="card-text"><small class="text-muted">감독: 존 와츠</small></p>
+                                    <p class="card-text"><small class="text-muted">주연: 톰 홀랜드</small></p>
+                                    <p class="card-text"><small class="text-muted">장르: 액션</small></p>
+                                    <p class="card-text"><small class="text-muted">상영시간: 120</small></p>
+                                    <p class="card-text"><small class="text-muted">영화 등급: 12세 이상 관람</small></p>
+                                    <p class="card-text">정체가 탄로난 스파이더맨 '피터 파커'(톰 홀랜드)가 문제를 해결하기 위해 '닥터 스트레인지'(베네딕트
+                                        컴버배치)의 도움을 받던 중 뜻하지 않게 멀티버스가 열리게 되고, 이를 통해 '닥터 옥토퍼스'(알프리드 몰리나) 등 각기 다른 차...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="row g-5">
+                <section>
+                    <link href="/css/stars.css" rel="stylesheet"/>
+                    <form class="mb-3" name="myform" id="myform" method="post">
+                        <fieldset>
+                            <span class="text-bold">별점을 선택해주세요</span>
+                            <input type="radio" name="reviewStar" value="5" id="rate1"><label
+                                for="rate1">★</label>
+                            <input type="radio" name="reviewStar" value="4" id="rate2"><label
+                                for="rate2">★</label>
+                            <input type="radio" name="reviewStar" value="3" id="rate3"><label
+                                for="rate3">★</label>
+                            <input type="radio" name="reviewStar" value="2" id="rate4"><label
+                                for="rate4">★</label>
+                            <input type="radio" name="reviewStar" value="1" id="rate5"><label
+                                for="rate5">★</label>
+                        </fieldset>
+                    </form>
+                    <form class="row g-3" action="#" method="post"><input type="hidden" name="#" value="#">
+                        <input type="hidden" class="#" name="#" value="77">
+                        <div class="col-md-9 col-lg-8">
+                            <label for="comment-textbox" hidden="">댓글</label>
+                            <textarea class="form-control" id="comment-textbox" placeholder="댓글 쓰기.." rows="2"
+                                      required="" name="content"></textarea>
+                        </div>
+                        <div class="col-md-3 col-lg-4">
+                            <label for="comment-submit" hidden="">댓글 쓰기</label>
+                            <button class="btn btn-primary" id="comment-submit" type="submit">쓰기</button>
+                        </div>
+                    </form>
+                    <ul id="article-comments" class="row col-md-10 col-lg-8 pt-3">
+                        <li>
+                            <form class="comment-form" action="#" method="post"><input type="hidden">
+                                <input type="hidden" class="article-id">
+                                <div class="row">
+                                    <div class="col-md-10 col-lg-9">
+                                        <strong>Win</strong>
+                                        <small>
+                                            <time datetime="2022-01-08T02:32:10">2022-01-08 02:32:10</time>
+                                        </small>
+                                        <p>Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula
+                                            condimentum.</p>
+                                    </div>
+                                    <div class="col-2 mb-3 align-self-center">
+                                        <button type="submit" class="btn btn-outline-danger" id="#">삭제</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                        <li>
+                            <form class="comment-form" action="#" method="post"><input type="hidden">
+                                <input type="hidden" class="article-id">
+                                <div class="row">
+                                    <div class="col-md-10 col-lg-9">
+                                        <strong>Win</strong>
+                                        <small>
+                                            <time datetime="2021-10-10T05:06:58">2021-10-10 05:06:58</time>
+                                        </small>
+                                        <p>Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue.
+                                            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+                                            cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat
+                                            tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac
+                                            neque.</p>
+                                    </div>
+                                    <div class="col-2 mb-3 align-self-center">
+                                        <button type="submit" class="btn btn-outline-danger" id="delete-comment-button">
+                                            삭제
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

@@ -15,8 +15,8 @@
     헤더삽입부
 </header>
 <div class="container">
-    <div class="col-sm-6 col-lg-12">
-        <div class="row mb-3 justify-content-md-center">
+    <div class="row mb-3 justify-content-md-center">
+        <div class="row g-5">
             <table class="table">
                 <thead>
                 <tr>
@@ -27,31 +27,22 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
+                <tr th:each="movieList : ${list}">
+                    <td th:text="${movieList.id}"></td>
+                    <td><a th:href="@{/movie/detail/} + ${movieList.id}" th:text="${movieList.title}"></a></td>
+                    <td th:text="${movieList.runTime}"></td>
+                    <td th:text="${movieList.grade}"></td>
                 </tr>
                 </tbody>
             </table>
 
             <div class="row">
                 <div class="text-end">
-                    <a th:role="button" th:href="@{/main/movie/regist}" class="btn btn-warning">영화등록</a>
+                    <a th:role="button" th:href="@{/movie/new}" class="btn btn-warning">영화등록</a>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 </body>
 </html>

@@ -32,17 +32,17 @@
                     <div class="card mb-3" style=" width: 100%;">
                         <div class="row mb-3">
                             <div class="col-md-5">
-                                <img src="..." class="img-fluid rounded-start" alt="...">
+                                <img th:src="${movie.imgUrl}" class="img-fluid rounded-start">
                             </div>
                             <div class="col-md-7">
                                 <div class="card-body">
-                                    <h5 class="card-title">제목입니다.</h5>
-                                    <p class="card-text"><small class="text-muted">감독: 존 와츠</small></p>
-                                    <p class="card-text"><small class="text-muted">주연: 톰 홀랜드</small></p>
-                                    <p class="card-text"><small class="text-muted">장르: 액션</small></p>
-                                    <p class="card-text"><small class="text-muted">상영시간: 120</small></p>
-                                    <p class="card-text"><small class="text-muted">영화 등급: 12세 이상 관람</small></p>
-                                    <p class="card-text">정체가 탄로난 스파이더맨 '피터 파커'(톰 홀랜드)가 문제를 해결하기 위해 '닥터 스트레인지'(베네딕트
+                                    <h5 class="card-title"th:text="${movie.title}">제목입니다.</h5>
+                                    <p class="card-text"><small class="text-muted" th:text="'감독: ' + ${movie.director}">감독: </small></p>
+                                    <p class="card-text"><small class="text-muted" th:text="'주연: ' + ${movie.actor}">주연: 톰 홀랜드</small></p>
+                                    <p class="card-text"><small class="text-muted" th:text="'장르: ' + ${movie.genres}">장르: 액션</small></p>
+                                    <p class="card-text"><small class="text-muted" th:value="'상영시간: ' + ${movie.runTime}">상영시간: 120</small></p>
+                                    <p class="card-text"><small class="text-muted" th:text="'영화등급: ' + ${movie.grade}">영화 등급: 12세 이상 관람</small></p>
+                                    <p class="card-text" th:text="${movie.content}">정체가 탄로난 스파이더맨 '피터 파커'(톰 홀랜드)가 문제를 해결하기 위해 '닥터 스트레인지'(베네딕트
                                         컴버배치)의 도움을 받던 중 뜻하지 않게 멀티버스가 열리게 되고, 이를 통해 '닥터 옥토퍼스'(알프리드 몰리나) 등 각기 다른 차...</p>
                                 </div>
                             </div>

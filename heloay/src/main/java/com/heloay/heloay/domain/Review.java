@@ -1,24 +1,45 @@
 package com.heloay.heloay.domain;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class MoviesReview {
+public class Review {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany()
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
 
+    @OneToMany(mappedBy = "review")
+    private List<UserAccount> userAccounts;
     private String content;
     private Integer voleCount;
-    private String score;
 
+
+    @Builder
+    public Review(Movie movie, String content, Integer voleCount) {
+        this.movie = movie;
+        this.content = content;
+        this.voleCount = voleCount;
+    }
+
+    public static Review createReview(Movie movie, String content, Integer voleCount){
+        return Review.builder()
+                .movie(movie)
+                .content(content)
+                .voleCount(voleCount)
+                .build();
+    }
+
+    public void putUser(UserAccount userAccount){
+        this.userAccounts.add(userAccount);
+    }
 }

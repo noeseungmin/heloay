@@ -1,4 +1,4 @@
-package com.heloay.heloay.domain;
+package com.heloay.heloay.domain.auditing;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

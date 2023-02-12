@@ -27,7 +27,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="movieList : ${list}">
+                <tr th:each="movieList : ${paging}">
                     <td th:text="${movieList.id}"></td>
                     <td><a th:href="@{/movie/detail/} + ${movieList.id}" th:text="${movieList.title}"></a></td>
                     <td th:text="${movieList.runTime}"></td>
@@ -35,7 +35,25 @@
                 </tr>
                 </tbody>
             </table>
-
+            <div th:if="${!paging.isEmpty()}">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                        <a class="page-link" th:href="@{|?page=${paging.number-1}|}">
+                            <span>이전</span>
+                        </a>
+                    </li>
+                    <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                        th:if="${page >= paging.number-5 and page <= paging.number+2}"
+                        th:classappend="${page == paging.number} ? 'active'" class="page-item">
+                        <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                    </li>
+                    <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                        <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+                            <span>다음</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
             <div class="row">
                 <div class="text-end">
                     <a th:role="button" th:href="@{/movie/new}" class="btn btn-warning">영화등록</a>

@@ -8,7 +8,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 public class Movie {
 
@@ -24,7 +23,6 @@ public class Movie {
     private List<UserAccount> userAccounts;
     private String imgName;
     private String imgUrl;
-
     private String title;
     private String content;
     private String genres;
@@ -32,7 +30,6 @@ public class Movie {
     private String director;
     private Integer runTime;
     private String grade;
-
 
     @Builder
     public Movie(String imgName, String imgUrl, String title, String content, String genres, String actor, String director, Integer runTime, String grade) {
@@ -47,23 +44,14 @@ public class Movie {
         this.grade = grade;
     }
 
-    public static Movie createMovie(String imgName, String imgUrl, String title, String content, String genres, String actor, String director, Integer runTime, String grade) {
-      return Movie.builder()
-              .imgUrl(imgUrl)
-              .imgName(imgName)
-              .title(title)
-              .content(content)
-              .genres(genres)
-              .actor(actor)
-              .director(director)
-              .runTime(runTime)
-              .grade(grade)
-              .build();
+    public void setImgName(String imgName) {
+        this.imgName = imgName;
     }
 
-    public void putUser(UserAccount userAccount){
-        this.userAccounts.add(userAccount);
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
+
 
     public void putReview(Review review){
         this.reviews.add(review);

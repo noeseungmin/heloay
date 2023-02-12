@@ -1,9 +1,12 @@
 package com.heloay.heloay.domain;
 
 import lombok.*;
+import org.apache.catalina.User;
 
 import javax.persistence.*;
 import java.util.List;
+
+import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
@@ -14,12 +17,13 @@ public class Review {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "movie_id")
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "movieId")
     private Movie movie;
 
-    @OneToMany(mappedBy = "review")
-    private List<UserAccount> userAccounts;
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "userId")
+    private UserAccount userAccount;
     private String content;
     private Integer voleCount;
 
@@ -39,7 +43,4 @@ public class Review {
                 .build();
     }
 
-    public void putUser(UserAccount userAccount){
-        this.userAccounts.add(userAccount);
-    }
 }

@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -23,23 +25,5 @@ class UserAccountTest {
     @Autowired
     UserAccountRepository userAccountRepository;
 
-    @Test
-    void userSave(){
-
-        Movie movie = Movie.createMovie("스파이더", "ww.eg.gk", "스파이더맨", "거미줄 슝","액션",
-                "톰 홀렌드", "몰?루", 120, "3");
-
-        movieRepository.save(movie);
-
-        Review review = Review.createReview(movie, "재밌네요",3);
-
-        reviewRepository.save(review);
-
-        UserAccount user1 = UserAccount.createUser("user1", movie, review, "cos1234", "홍길동", 20);
-
-        UserAccount userAccount = userAccountRepository.save(user1);
-
-        Assertions.assertThat(userAccount.getMovie().getId()).isEqualTo(1L);
 
     }
-}

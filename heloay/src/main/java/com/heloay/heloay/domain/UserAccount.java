@@ -1,54 +1,49 @@
 package com.heloay.heloay.domain;
 
-import com.heloay.heloay.domain.auditing.BaseTimeEntity;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.List;
 
-@Entity(name = "account_user")
+import static javax.persistence.FetchType.LAZY;
+
+@Entity
 @Getter
-@Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserAccount {
     @Id
-    @Column(length = 50)
-    private String userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @ManyToOne
+    @Column(unique = true)
+
+    private String username;
+
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
-    @ManyToOne
-    @JoinColumn(name = "review_id")
-    private Review review;
+    @OneToMany(mappedBy = "userAccount")
+    private List<Review> reviews;
 
-    @Column(nullable = false)
+
     private String password;
-    private String username;
-    private int age;
+
+    private String name;
+    @Column(unique = true)
+    private String email;
+    private String role;
 
     @Builder
-    public UserAccount(String userId, Movie movie, Review review, String password, String username, int age) {
-        this.userId = userId;
-        this.movie = movie;
-        this.review = review;
-        this.password = password;
+    public UserAccount(String username, String password, String name, String email, String role) {
         this.username = username;
-        this.age = age;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+        this.role = role;
     }
-
-    public static UserAccount createUser(String userId, Movie movie, Review review, String password, String username, int age){
-        return UserAccount.builder()
-                .userId(userId)
-                .movie(movie)
-                .review(review)
-                .password(password)
-                .username(username)
-                .age(age)
-                .build();
-    }
-
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <titl>Title</titl>
@@ -11,7 +11,7 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a th:href="@{/main}" class="nav-link px-2 text-secondary">홈</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">게시판</a></li>
-                <li><a th:href="@{/main/movie}" class="nav-link px-2 text-white">영화</a></li>
+                <li><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/main/movie}" class="nav-link px-2 text-white">영화</a></li>
 
             </ul>
 
@@ -20,8 +20,10 @@
             </form>
 
             <div class="text-end">
-                <a th:role="button" class="btn btn-outline-light me-2">Login</a>
-                <a th:role="button" th:href="@{/main/signup}" class="btn btn-warning" >Sign-up</a>
+                <a th:role="button" sec:authorize="isAnonymous()" th:href="@{/main/login}" class="btn btn-primary">Login</a>
+                <a th:role="button" sec:authorize="isAnonymous()" th:href="@{/main/signup}" class="btn btn-primary">Sign-up</a>
+                <a th:role="button" sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-secondary">Logout</a>
+
             </div>
         </div>
     </div>

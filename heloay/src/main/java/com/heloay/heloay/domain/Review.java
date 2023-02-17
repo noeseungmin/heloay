@@ -9,9 +9,9 @@ import java.util.List;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Data
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Review {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,25 +22,25 @@ public class Review {
     private Movie movie;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "username")
     private UserAccount userAccount;
+    @Column(length = 1000)
     private String content;
-    private Integer voleCount;
+    private float rating;
 
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
+    }
 
     @Builder
-    public Review(Movie movie, String content, Integer voleCount) {
+    public Review(Movie movie, UserAccount userAccount ,String content, float rating) {
         this.movie = movie;
+        this.userAccount = userAccount;
         this.content = content;
-        this.voleCount = voleCount;
+        this.rating = rating;
     }
-
-    public static Review createReview(Movie movie, String content, Integer voleCount){
-        return Review.builder()
-                .movie(movie)
-                .content(content)
-                .voleCount(voleCount)
-                .build();
-    }
-
 }

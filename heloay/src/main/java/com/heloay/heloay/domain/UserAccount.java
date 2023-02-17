@@ -15,21 +15,16 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserAccount {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(unique = true)
-
     private String username;
 
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "movie_id")
-    private Movie movie;
+    @OneToMany(mappedBy = "userAccount")
+    private List<Movie> movies;
 
     @OneToMany(mappedBy = "userAccount")
     private List<Review> reviews;
-
 
     private String password;
 

@@ -1,5 +1,6 @@
 package com.heloay.heloay.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.apache.catalina.User;
 
@@ -16,11 +17,13 @@ public class Movie {
     @Column(name = "movie_id")
     private Long id;
 
-    @OneToMany(mappedBy = "movie")
+    @OneToMany(mappedBy = "movie",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties("{movie}")
     private List<Review> reviews;
 
-    @OneToMany(mappedBy = "movie")
-    private List<UserAccount> userAccounts;
+    @ManyToOne
+    @JoinColumn(name = "username")
+    private UserAccount userAccount;
     private String imgName;
     private String imgUrl;
     private String title;

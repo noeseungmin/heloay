@@ -66,6 +66,19 @@ Spring Boot
 <img width="80%" src=""/>
 
 ## 핵심 기능
+### 회원가입
+<img width="80%" src="https://user-images.githubusercontent.com/106221717/219857679-6392ed05-4fcc-4c9e-abd2-863569e29d51.PNG"/>
+
+ ```
+<div class="mb-3">
+<label th:for="username">아이디</label>
+<input type="text" th:field="*{username}" class="form-control" placeholder="아이디를 입력하세요" th:class="${#fields.hasErrors('username')}? 'form-control fieldError' : 'form-control'">
+<p th:if = "${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+</div>
+```
+* post요청으로 들어온 데이터를 컨트롤러에서 검증하여 예외 발생시 결과를 model에 담아서 폼으로 랜더링 한다. 에러발생시 해당 클래스 `class="form-control" placeholder="아이디를 입력하세요" th:class="${#fields.hasErrors('username')}? 'form-control fieldError' : 'form-control'">`를 에러필드로 변경하고 에러 내용을 출력한다(`th:errors="*{username}"`).
+
+
 ### 로그인 
 #### 로그인 전
 <img width="80%" src="https://user-images.githubusercontent.com/106221717/219847960-c13f7e95-9bbb-4cc3-94f3-351f7784ff11.PNG"/>
@@ -108,10 +121,31 @@ sec:authorize="isAuthenticated()" //로그아웃 버튼
 * 이전 페이지가 없는 경우 "이전" 링크 비활성화(다음 페이지도 동일) 페이지 리스트를 루프 `th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}` 돌면서 해당 페이지로 이동 할 수 있는 링크 생성 `th:classappend="${page == paging.number} ? 'active'" class="page-item"` 조건식이 참인 경우 클래스값을 class 속성에 추가한다.
 
 ### 영화
+<img width="80%" src="https://user-images.githubusercontent.com/106221717/219864247-e2d2b6aa-a1db-44d2-8505-fda54aae129a.PNG"/>
+
+<img width="80%" src="https://user-images.githubusercontent.com/106221717/219864177-ee73ad3e-3506-43df-9107-0470caaecc08.PNG"/>
+
+* 사진 파일의 경우 UUID를 이용하여 파일 고유이름을 랜덤으로 생성하여 지정해준 뒤 MultipartFile 인터페이스를 통해 사진 파일업로드 resources\\static\\movieposters 폴더에 저장
 
 ### 리뷰
-<img width="80%" src="(https://user-images.githubusercontent.com/106221717/219852948-f4352b79-3903-4b80-979e-95716fceb11e.PNG"/>
+#### 리뷰 등록 
+<img width="80%" src="https://user-images.githubusercontent.com/106221717/219853110-75e73782-4d4d-4a2b-876c-3374d4564241.PNG"/>
 
-<img width="80%" src="https://user-images.githubusercontent.com/106221717/219852929-ea2c304d-7e3c-4c86-8fce-f12efca8d7f1.PNG"/>
+* 양방향 매핑을 통해 유저아이디, 영화아이디 리뷰에 저장 할 수 있게 엔티티 구성
+
+<img width="80%" src="https://user-images.githubusercontent.com/106221717/219854256-d7bc40ba-7a6c-4d8d-873b-8c529cbcedc3.png"/>
+
+* 스프링시큐리티는 인증된 사용자 정보를 세션에 담아놓고 세션이 유지되는 동안 사용자 객체를 DB로 접근하는 방법 없이 바로 사용할 수 있도록 한다. SecurityContextHolder 내부의 SecurityContext에 Authentication 객체로 저장해두고 있는데 로그인 세션 정보를 애노테이션으로 간편하게 받을 수 있는 @AuthenticationPrincipal 사용하여 로그인 세션 정보를 받아와서 리뷰 테이블에 유저정보를 저장한다.
+
+#### 리뷰 삭제
+<img width="80%" src="https://user-images.githubusercontent.com/106221717/219854335-cf4f3331-5320-4943-ae02-82f4c2f42e72.png"/>
+
+<img width="80%" src="https://user-images.githubusercontent.com/106221717/219854398-d612f3ff-8a0f-4d85-81c4-2b9083996eff.PNG"/>
+
+<img width="80%" src="https://user-images.githubusercontent.com/106221717/219854148-cea05396-35df-4201-a651-2aeb3a6b96db.PNG"/>
+
+* 등록과 동일하게 유저 정보를 가져와 thymleaf th:if 문법을 이용해 현재 로그인된 사용자와 댓글 작성자가 같을때만 삭제 버튼 활성화 되도록 설정
+
 
 ## 고찰
+<img width="80%" src=""/>

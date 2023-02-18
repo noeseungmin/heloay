@@ -26,9 +26,9 @@ public class ReviewController {
 
 
     @PostMapping("movie/detail/{movieId}")
-    public String reviewWrite(Review review, @PathVariable Long movieId,@AuthenticationPrincipal AccountContext accountContext){
+    public String reviewWrite(ReviewDto reviewDto, @PathVariable Long movieId,@AuthenticationPrincipal AccountContext accountContext){
         String username = accountContext.getUserAccount().getUsername();
-        reviewService.reviewWrite(movieId, review, username);
+        reviewService.reviewWrite(movieId, reviewDto, username);
         return "redirect:/movie/detail/" + movieId;
     }
 

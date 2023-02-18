@@ -25,7 +25,8 @@ public class ReviewService {
 
 
     @Transactional
-    public Review reviewWrite(Long movieId, Review review, String username) {
+    public Review reviewWrite(Long movieId, ReviewDto reviewDto, String username) {
+        Review review = reviewDto.toEntity();
         UserAccount findUser = userAccountRepository.findByUsername(username);
         Movie findMovie = movieRepository.findById(movieId).orElseThrow(() -> {
             return new IllegalArgumentException("댓글 작성 실패 : 게시글을 찾을 수 없습니다.");

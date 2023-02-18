@@ -15,64 +15,66 @@
 <div class="container">
     <header id="article-form-header" class="py-5 text-center"><h1>영화등록</h1></header>
     <form th:action th:object="${movieform}" method="post" enctype="multipart/form-data">
-        <div class="row mb-3 justify-content-md-center">
-            <label th:for="title" class="col-sm-2 col-lg-1 col-form-label text-sm-end">제목</label>
-            <div class="col-sm-8 col-lg-9">
-                <input type="text" th:field="*{title}" class="form-control" required>
+        <form th:action method="post" enctype="multipart/form-data">
+            <div class="row mb-3 justify-content-md-center">
+                <label th:for="title" class="col-sm-2 col-lg-1 col-form-label text-sm-end">제목</label>
+                <div class="col-sm-8 col-lg-9">
+                    <input type="text" th:field="*{title}" class="form-control" required>
+                </div>
             </div>
-        </div>
-        <div class="row mb-3 justify-content-md-center">
-            <label th:for="genres"
-                   class="col-sm-2 col-lg-1 col-form-label text-sm-end">장르</label>
-            <div class="col-sm-8 col-lg-9">
-                <input type="text" th:field="*{genres}" class="form-control" required></div>
-        </div>
-        <div class="row mb-3 justify-content-md-center">
-            <label th:for="actor"
-                   class="col-sm-2 col-lg-1 col-form-label text-sm-end">배우</label>
-            <div class="col-sm-8 col-lg-9">
-                <input type="text" th:field="*{actor}" class="form-control" required></div>
-        </div>
-        <div class="row mb-3 justify-content-md-center">
-            <label th:for="director"
-                   class="col-sm-2 col-lg-1 col-form-label text-sm-end">감독</label>
-            <div class="col-sm-8 col-lg-9">
-                <input type="text" th:field="*{director}" class="form-control" required>
+            <div class="row mb-3 justify-content-md-center">
+                <label th:for="genres"
+                       class="col-sm-2 col-lg-1 col-form-label text-sm-end">장르</label>
+                <div class="col-sm-8 col-lg-9">
+                    <input type="text" th:field="*{genres}" class="form-control" required></div>
             </div>
-        </div>
-        <div class="row mb-3 justify-content-md-center">
-            <label th:for="runtime"
-                   class="col-sm-2 col-lg-1 col-form-label text-sm-end">상영시간</label>
-            <div class="col-sm-8 col-lg-9">
-                <input type="number" th:field="*{runTime}" class="form-control" required>
+            <div class="row mb-3 justify-content-md-center">
+                <label th:for="actor"
+                       class="col-sm-2 col-lg-1 col-form-label text-sm-end">배우</label>
+                <div class="col-sm-8 col-lg-9">
+                    <input type="text" th:field="*{actor}" class="form-control" required></div>
             </div>
-        </div>
-        <div class="row mb-3 justify-content-md-center">
-            <label th:for="grade"
-                   class="col-sm-2 col-lg-1 col-form-label text-sm-end">등급</label>
-            <div class="col-sm-8 col-lg-9">
-                <input type="text" th:field="*{grade}" class="form-control" required></div>
-        </div>
-        <div class="row mb-3 justify-content-md-center">
-            <label th:for="content"
-                   class="col-sm-2 col-lg-1 col-form-label text-sm-end">내용</label>
-            <div class="col-sm-8 col-lg-9">
-                <textarea class="form-control" th:field="*{content}" rows="5" required></textarea>
+            <div class="row mb-3 justify-content-md-center">
+                <label th:for="director"
+                       class="col-sm-2 col-lg-1 col-form-label text-sm-end">감독</label>
+                <div class="col-sm-8 col-lg-9">
+                    <input type="text" th:field="*{director}" class="form-control" required>
+                </div>
             </div>
-        </div>
-        <div class="row mb-3 justify-content-md-center">
-            <label th:for="imgUrl" class="col-sm-2 col-lg-1 col-form-label text-sm-end">영화사진</label>
-            <div class="col-sm-8 col-lg-9">
-                <input type="file" th:field="*{imgUrl}" class="form-control">
+            <div class="row mb-3 justify-content-md-center">
+                <label th:for="runtime"
+                       class="col-sm-2 col-lg-1 col-form-label text-sm-end">상영시간</label>
+                <div class="col-sm-8 col-lg-9">
+                    <input type="number" th:field="*{runTime}" class="form-control" required>
+                </div>
             </div>
-        </div>
-        <div class="row mb-5 justify-content-md-center">
-            <div class="col-sm-10 d-grid gap-2 d-sm-flex justify-content-sm-end">
-                <button type="submit" class="btn btn-primary">저장</button>
-                <button type="button" th:href="@{/main}" class="btn btn-secondary">취소</button>
+            <div class="row mb-3 justify-content-md-center">
+                <label th:for="grade"
+                       class="col-sm-2 col-lg-1 col-form-label text-sm-end">등급</label>
+                <div class="col-sm-8 col-lg-9">
+                    <input type="text" th:field="*{grade}" class="form-control" required></div>
             </div>
-        </div>
-    </form>
+            <div class="row mb-3 justify-content-md-center">
+                <label th:for="content"
+                       class="col-sm-2 col-lg-1 col-form-label text-sm-end">내용</label>
+                <div class="col-sm-8 col-lg-9">
+                    <textarea class="form-control" th:field="*{content}" rows="5" required></textarea>
+                </div>
+            </div>
+            <div class="row mb-3 justify-content-md-center">
+                <label th:for="imgUrl" class="col-sm-2 col-lg-1 col-form-label text-sm-end">영화사진</label>
+                <div class="col-sm-8 col-lg-9">
+                    <input type="file" th:field="*{imgUrl}" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-5 justify-content-md-center">
+                <div class="col-sm-10 d-grid gap-2 d-sm-flex justify-content-sm-end">
+                    <button type="submit" class="btn btn-primary">저장</button>
+                    <a th:role="button" th:href="@{/main/movie}" class="btn btn-secondary">취소</a>
+
+                </div>
+            </div>
+        </form>
 </div>
 </body>
 </html>

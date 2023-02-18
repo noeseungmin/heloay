@@ -9,8 +9,7 @@ import java.util.List;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
-@Data
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Review {
 

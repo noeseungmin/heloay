@@ -1,27 +1,18 @@
 package com.heloay.heloay.dto;
 
-import com.heloay.heloay.domain.Movie;
-import com.heloay.heloay.domain.Review;
 import com.heloay.heloay.domain.UserAccount;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.List;
-
-import static javax.persistence.FetchType.LAZY;
 
 @Data
 @NoArgsConstructor
 public class SignUpDto {
-
-    private Long id;
 
     @Size(min = 3, max = 25)
     @NotEmpty(message = "사용자 ID는 필수항목 입니다.")

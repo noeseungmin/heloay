@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -50,4 +49,18 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
+    public Movie update(Long movieId, MovieDto dto) {
+        Movie movie = dto.toEntity();
+        Movie movieUpdate = movieRepository.findById(movieId).orElse(null);
+
+        if(movieUpdate == null){
+            return null;
+        }
+        movieUpdate.patch(movie);
+        return movieRepository.save(movieUpdate);
+    }
+
+    public void deleteMovie(Long movieId) {
+        movieRepository.deleteById(movieId);
+    }
 }

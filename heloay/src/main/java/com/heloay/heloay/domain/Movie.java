@@ -56,7 +56,30 @@ public class Movie {
     }
 
 
-    public void putReview(Review review){
-        this.reviews.add(review);
+    public void patch(Movie movie) {
+        if (movie.imgUrl != null) {
+            this.imgUrl = movie.imgUrl;
+        }
+        if (movie.imgName != null) {
+            this.imgName = movie.imgName;
+        }
+        if (movie.title != null) {
+            this.title = movie.title;
+        }
+        if (movie.content != null) {
+            this.content = movie.content;
+        }
+        if (movie.director != null) {
+            this.director = movie.director;
+        }
+        if (movie.actor != null) {
+            this.actor = movie.actor;
+        }
+        if (movie.runTime != null) {
+            this.runTime = movie.runTime;
+        }
+        if (movie.grade != null) {
+            this.grade = movie.grade;
+        }
     }
 }

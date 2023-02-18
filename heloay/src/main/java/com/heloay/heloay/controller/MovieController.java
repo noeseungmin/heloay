@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -48,5 +47,23 @@ public class MovieController {
                               @RequestParam("imgUrl") MultipartFile poster) throws IOException {
         Movie movie = movieService.create(dto, poster);
         return "redirect:/movie/detail/" + movie.getId();
+    }
+    @GetMapping("movie/{movieId}/update")
+    public String movieUpdate(@PathVariable Long movieId, Model model){
+        Movie movie = movieService.findMovie(movieId);
+        model.addAttribute("update", movie);
+        return "view/update";
+    }
+    @PostMapping("movie/{movieId}/update")
+    public String movieUpdate(@PathVariable Long movieId, MovieDto dto){
+        Movie movie = movieService.update(movieId, dto);
+        return "redirect:/movie/detail/" + movieId;
+    }
+
+    @PostMapping("/movie/{movieId}")
+    public String delete(@PathVariable Long movieId){
+        movieService.deleteMovie(movieId);
+
+        return "redirect:/main/movie";
     }
 }

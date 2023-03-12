@@ -9,6 +9,7 @@
 - [패키징구조](#패키징)
 - [다이어그램](#다이어)
 - [유스케이스](#케이스)
+- [API](#API)
 - [실행화면](#실행)
 - [핵심기능](#핵심)
   + [애플리케이션 아키텍처](#아키텍처)
@@ -54,7 +55,8 @@
 ## <div id="다이어">ERD</div>
 <img width="80%" src="https://user-images.githubusercontent.com/106221717/219865337-50b471ec-c067-4c38-89fb-6f3c993ad795.PNG"/>
 
-## API 설계
+## <div id="API">API 설계</div>
+<img width="80%" src="https://user-images.githubusercontent.com/106221717/224544627-97492ce1-4f8c-444b-98af-17a05a30846d.jpg"/>
 
 ## <div id="케이스">유스케이스</div>
 <img width="80%" src="https://user-images.githubusercontent.com/106221717/219866916-fc65538d-1b9b-4285-b9d4-1befa64a48c2.PNG"/>

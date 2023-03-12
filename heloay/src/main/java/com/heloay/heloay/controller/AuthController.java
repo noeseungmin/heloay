@@ -20,7 +20,7 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @GetMapping("/main/login")
+    @GetMapping("/login")
     public String login() {
         return "view/login";
     }
@@ -30,19 +30,19 @@ public class AuthController {
         return "view/main";
     }
 
-    @GetMapping("main/signup")
+    @GetMapping("/signup")
     public String signupForm(Model model){
         model.addAttribute("signup", new SignUpDto());
         return "view/signup";
     }
 
-    @PostMapping("main/signup")
+    @PostMapping("/signup")
     public String createUser(@ModelAttribute("signup") @Valid SignUpDto dto, BindingResult result){
         if(result.hasErrors()){
             return "view/signup";
         }
         authService.createUser(dto);
-        return "redirect:/main";
+        return "redirect:/";
 
     }
 }

@@ -50,8 +50,8 @@
                     </div>
                     <div class="row mb-5 justify-content-md-center">
                         <div class="col-sm-10 d-grid gap-2 d-sm-flex justify-content-sm-end">
-                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:role="button" th:href="@{'/movie/'+ ${movie.id} + '/update'}" class="btn btn-primary">수정</a>
-                            <form th:action="@{'/movie/' + ${movie.id}}" th:method="post">
+                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:role="button" th:href="@{'/movies/'+ ${movie.id} + '/update'}" class="btn btn-primary">수정</a>
+                            <form th:action="@{'/movies/' + ${movie.id} + '/delete'}" th:method="post">
                                 <button sec:authorize="hasRole('ROLE_ADMIN')" type="submit" class="btn btn-outline-danger">삭제</button>
                             </form>
                         </div>
@@ -89,7 +89,7 @@
                     </form>
                 </div>
                 <div>
-                            <form th:each=" reviews : ${movie.reviews}" th:action="'/review/' + ${reviews.id} + '/delete'" th:method="post">
+                            <form th:each=" reviews : ${movie.reviews}" th:action="'/reviews/' + ${reviews.id} + '/delete'" th:method="post">
                                 <input type="hidden" th:name="movieId" th:value="${movie.id}">
                                 <div class="row">
                                     <div class="col-md-10 col-lg-9">
@@ -101,7 +101,7 @@
                                     <div class="col-2 mb-3 align-self-center">
                                         <button type="submit" class="btn btn-outline-danger"
                                                 th:if="${#authorization.expression('isAuthenticated()')} and ${reviews.userAccount.username} == ${#authentication.name}"
-                                                th:href="@{/review/delete}">삭제</button>
+                                                th:href="@{/reviews/delete}">삭제</button>
                                     </div>
                                 </div>
                             </form>

@@ -24,7 +24,7 @@
       <header class="py-5 text-center">
         <h1>회원가입</h1>
       </header>
-  <form role="form" th:action="@{/main/signup}" th:object="${signup}" method="post">
+  <form role="form" th:action="@{/signup}" th:object="${signup}" method="post">
     <div class="mb-3">
       <label th:for="username">아이디</label>
       <input type="text" th:field="*{username}" class="form-control" placeholder="아이디를 입력하세요" th:class="${#fields.hasErrors('username')}? 'form-control fieldError' : 'form-control'">
@@ -50,7 +50,7 @@
       <input class="form-control" th:field="*{role}" type="text">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
-    <button th:role="button" th:href="@{/main}" class="btn btn-secondary">취소</button>
+    <button th:role="button" th:href="@{/}" class="btn btn-secondary">취소</button>
   </form>
 </div>
 </body>

@@ -29,7 +29,7 @@
                 <tbody>
                 <tr th:each="movieList : ${paging}">
                     <td th:text="${movieList.id}"></td>
-                    <td><a th:href="@{/movie/detail/} + ${movieList.id}" th:text="${movieList.title}"></a></td>
+                    <td><a th:href="@{/movies/} + ${movieList.id}" th:text="${movieList.title}"></a></td>
                     <td th:text="${movieList.runTime}"></td>
                     <td th:text="${movieList.grade}"></td>
                 </tr>
@@ -56,7 +56,7 @@
             </div>
             <div class="row">
                 <div class="text-end">
-                    <a th:role="button" th:href="@{/movie/new}" class="btn btn-warning">영화등록</a>
+                    <a th:role="button" th:href="@{/movies/new}" class="btn btn-warning">영화등록</a>
                 </div>
             </div>
         </div>

@@ -53,7 +53,7 @@
 <img width="80%" src="https://user-images.githubusercontent.com/106221717/219867188-714148f1-93d8-4ad1-bea1-93b8b3a22deb.PNG"/>
 
 ## <div id="다이어">ERD</div>
-<img width="80%" src="https://user-images.githubusercontent.com/106221717/219865337-50b471ec-c067-4c38-89fb-6f3c993ad795.PNG"/>
+<img width="80%" src="https://user-images.githubusercontent.com/106221717/224985552-9a00805c-ecc4-4370-93ce-a5563cd9d88a.png"/>
 
 ## <div id="API">API 설계</div>
 <img width="80%" src="https://user-images.githubusercontent.com/106221717/224544627-97492ce1-4f8c-444b-98af-17a05a30846d.jpg"/>

@@ -42,11 +42,10 @@ public class MovieService {
         File saveFile = new File(projectPath, fileName);
         file.transferTo(saveFile);
 
-
-        movie.setImgUrl("/movieposters/"+ fileName);
-        movie.setImgName(fileName);
+        movie.imageCreate(fileName, "/movieposters/"+ fileName);
 
         return movieRepository.save(movie);
+
     }
 
     public Movie update(Long movieId, MovieDto dto) {
@@ -61,6 +60,11 @@ public class MovieService {
     }
 
     public void deleteMovie(Long movieId) {
+
         movieRepository.deleteById(movieId);
+    }
+
+    public Page<Movie> movieSearchList(String searchKeyword, Pageable pageable){
+        return movieRepository.findByTitleContaining(searchKeyword, pageable);
     }
 }

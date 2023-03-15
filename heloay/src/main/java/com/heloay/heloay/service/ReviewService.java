@@ -31,8 +31,8 @@ public class ReviewService {
         Movie findMovie = movieRepository.findById(movieId).orElseThrow(() -> {
             return new IllegalArgumentException("댓글 작성 실패 : 게시글을 찾을 수 없습니다.");
         });
-        review.setMovie(findMovie);
-        review.setUserAccount(findUser);
+
+        review.findMovieAndUserAccount(findMovie, findUser);
         return reviewRepository.save(review);
     }
 

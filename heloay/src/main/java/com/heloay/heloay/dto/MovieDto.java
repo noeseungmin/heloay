@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MovieDto {
-
-    private Long id;
     private String imgUrl;
     private String imgName;
     private String title;

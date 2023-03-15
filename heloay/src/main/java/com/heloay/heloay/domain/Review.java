@@ -1,19 +1,24 @@
 package com.heloay.heloay.domain;
 
-import lombok.*;
-import org.apache.catalina.User;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
+@SequenceGenerator(
+        name = "REVIEW_SEQ_GENERATOR", // 시퀀스 생성기 이름
+        sequenceName = "REVIEW_SEQ", // 실제 DB의 시퀀스
+        initialValue = 1, allocationSize = 1)
 public class Review {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REVIEW_SEQ_GENERATOR")
     private Long id;
 
     @ManyToOne(fetch = LAZY)
@@ -27,16 +32,14 @@ public class Review {
     private String content;
     private float rating;
 
-    public void setMovie(Movie movie) {
+    public void findMovieAndUserAccount(Movie movie, UserAccount userAccount){
         this.movie = movie;
-    }
-
-    public void setUserAccount(UserAccount userAccount) {
         this.userAccount = userAccount;
     }
 
     @Builder
-    public Review(Movie movie, UserAccount userAccount ,String content, float rating) {
+    public Review(Long id, Movie movie, UserAccount userAccount ,String content, float rating) {
+        this.id = id;
         this.movie = movie;
         this.userAccount = userAccount;
         this.content = content;

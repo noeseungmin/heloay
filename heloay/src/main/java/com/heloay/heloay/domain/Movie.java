@@ -2,18 +2,23 @@ package com.heloay.heloay.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import org.apache.catalina.User;
 
 import javax.persistence.*;
 import java.util.List;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 @Entity
 @Getter
 @NoArgsConstructor
+@SequenceGenerator(
+        name = "MOVIE_SEQ_GENERATOR", // 시퀀스 생성기 이름
+        sequenceName = "MOVIE_SEQ", // 실제 DB의 시퀀스
+        initialValue = 1, allocationSize = 1)
 public class Movie {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = SEQUENCE, generator = "MOVIE_SEQ_GENERATOR")
     @Column(name = "movie_id")
     private Long id;
 
@@ -47,14 +52,10 @@ public class Movie {
         this.grade = grade;
     }
 
-    public void setImgName(String imgName) {
+    public void imageCreate(String imgName, String imgUrl){
         this.imgName = imgName;
-    }
-
-    public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
-
 
     public void patch(Movie movie) {
         if (movie.imgUrl != null) {

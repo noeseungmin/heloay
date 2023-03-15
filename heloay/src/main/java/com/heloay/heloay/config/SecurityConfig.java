@@ -15,23 +15,21 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
-    private final UserDetailsService userDetailsService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/main", "/main/signup", "/main/login").permitAll()
+                .antMatchers("/", "/signup", "/login").permitAll()
                 .antMatchers("/user").hasRole("USER")
-                .antMatchers("/movie/new").hasRole("ADMIN")
+                .antMatchers("/movies/new").hasRole("ADMIN")
                 .and()
-                .csrf().ignoringAntMatchers("/h2-console/**")
+                .csrf() //H2콘솔 사용 안해서 지움
                 .and()
                 .headers()
                 .addHeaderWriter(new XFrameOptionsHeaderWriter(
@@ -40,11 +38,11 @@ public class SecurityConfig {
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login_proc")
-                .defaultSuccessUrl("/main")
+                .defaultSuccessUrl("/")
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/main")
+                .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);
         return http.build();
     }

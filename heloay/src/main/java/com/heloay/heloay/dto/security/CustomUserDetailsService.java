@@ -1,4 +1,4 @@
-package com.heloay.heloay.config;
+package com.heloay.heloay.dto.security;
 
 import com.heloay.heloay.domain.UserAccount;
 import com.heloay.heloay.repository.UserAccountRepository;

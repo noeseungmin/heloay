@@ -40,7 +40,8 @@ public class Movie {
     private String grade;
 
     @Builder
-    public Movie(String imgName, String imgUrl, String title, String content, String genres, String actor, String director, Integer runTime, String grade) {
+    public Movie(Long id, String imgName, String imgUrl, String title, String content, String genres, String actor, String director, Integer runTime, String grade) {
+        this.id = id;
         this.imgName = imgName;
         this.imgUrl = imgUrl;
         this.title = title;
@@ -56,7 +57,6 @@ public class Movie {
         this.imgName = imgName;
         this.imgUrl = imgUrl;
     }
-
     public void patch(Movie movie) {
         if (movie.imgUrl != null) {
             this.imgUrl = movie.imgUrl;

@@ -16,7 +16,7 @@
   + [회원가입](#핵심0)
   + [로그인](#핵심1)
   + [비밀번호 암호화](#핵심2)
-  + [페이징](#핵심3)
+  + [검색 & 페이징](#핵심3)
   + [영화 등록](#핵심4)
   + [리뷰](#핵심5)
 - [고찰](#고찰)
@@ -36,6 +36,7 @@
 * Spring Data JPA
 * Thymeleaf
 * Spring Security
+* Querydsl
 * MariaDB
 * Lombok
 
@@ -73,7 +74,7 @@
 <img width="80%" src="https://user-images.githubusercontent.com/106221717/219846093-8db7b889-45d2-43cf-9f98-ebf0a679bb96.gif"/>
 
 #### 1.4 로그아웃
-<img width="80%" src="https://user-images.githubusercontent.com/106221717/219866624-7d4dc976-d71a-4b31-b3c1-f8cd3a4e7962.gif" />
+<img width="80%" src="https://user-images.githubusercontent.com/106221717/228532804-f5efcd15-c3f9-463a-9802-ef52e25a0c73.gif" />
 
 
 ### 2. 영화 등록
@@ -95,8 +96,17 @@
 #### 4.2 리뷰 삭제
 <img width="80%" src="https://user-images.githubusercontent.com/106221717/219846868-31442508-7080-468e-afac-4e736f53bf71.gif"/>
 
-### 5. 페이징 & 상세 페이지 이동
-<img width="80%" src="https://user-images.githubusercontent.com/106221717/219866594-880c4d98-ae3f-4281-a0de-a5fad3d1d165.gif"/>
+
+### 5. 상세 페이지 이동
+<img width="80%" src="https://user-images.githubusercontent.com/106221717/228532596-0c0c9a02-9531-4369-864e-bf1f855210f3.gif"/>
+
+
+### 5. 검색 & 페이징
+#### 5.1 검색 기능
+<img width="80%" src="https://user-images.githubusercontent.com/106221717/228530491-c6f9e4c5-f1b8-4144-b3b8-1d021d5becce.gif"/>
+
+#### 5.2 페이징
+<img width="80%" src="https://user-images.githubusercontent.com/106221717/228530894-a117802c-e972-4356-bc62-6d0e48c352c8.gif"/>
 
 ## <div id="핵심">핵심 기능</div>
 ### <div id="아키텍처">애플리케이션 아키텍처</div>
@@ -148,19 +158,27 @@ sec:authorize="isAuthenticated()" //로그아웃 버튼
 <img width="80%" src="https://user-images.githubusercontent.com/106221717/219849278-c727d193-eef9-4223-97c4-e0b8d6222179.PNG"/>
 
 
-### <div id="핵심3">페이징</div>
+### <div id="핵심3">검색 & 페이징</div>
 
-<img width="80%" src="https://user-images.githubusercontent.com/106221717/219851541-f30e267d-e702-4df1-b004-1efd1844fa66.PNG"/>
+<img width="80%" src="https://user-images.githubusercontent.com/106221717/228534852-58b7a8d8-80e3-40d1-b6d5-d179a446b786.png"/>
 
-* `http://localhost:8080/main/movie/list?page=0` 처럼 GET 방식으로 요청된 URL에서 page값을 가져오기 위해 @RequestParam(value="page", defaultValue="0") int page 매개변수 추가 page가 전달되지 않을시 디폴트 값0 이 되도록 설정
+* 
 
-<img width="80%" src="https://user-images.githubusercontent.com/106221717/219851556-b2725e11-a3a5-4a5e-bc68-2fd26299afcf.PNG"/>
+<img width="80%" src="https://user-images.githubusercontent.com/106221717/228534766-1cd4017a-8afc-4d9e-b2f1-178258242fb9.png"/>
 
-* Pageable 객체 생성시 `PageRequest.of(page, 10)`에서 page는 조회할 페이지의 번호 10은 한페이지에 보여줄 게시물의 숫자를 의미한다. 이렇게 하면 데이터 전체 조회가 아닌 한 페이지 데이터를 조회하도록 쿼리각 변경된다.
+* @QueryProjection DTO를 대상으로 하는게 아니라 DTO 기반으로 생성된 QDTO 객체를 대상으로 합니다.
 
-<img width="80%" src="https://user-images.githubusercontent.com/106221717/219851563-dc9e3058-5e19-4df4-bc90-ab523d6072ef.PNG"/>
+<img width="80%" src="https://user-images.githubusercontent.com/106221717/228534821-ecd92be4-b89d-424c-a38f-b21040177185.png"/>
 
-* 이전 페이지가 없는 경우 "이전" 링크 비활성화(다음 페이지도 동일) 페이지 리스트를 루프 `th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}` 돌면서 해당 페이지로 이동 할 수 있는 링크 생성 `th:classappend="${page == paging.number} ? 'active'" class="page-item"` 조건식이 참인 경우 클래스값을 class 속성에 추가한다.
+* 
+
+<img width="80%" src="https://user-images.githubusercontent.com/106221717/228535974-630531c9-9354-420c-b51d-7e057516ac7e.png"/>
+
+* querydsl BooleanExpression 함수를 만들어서 넘어온 keyword를 조회하는 구문을 추가하였습니다. null이 리턴될경우 where 절에서 null로 검색하지않고 넘어갑니다.
+
+<img width="80%" src="https://user-images.githubusercontent.com/106221717/228534874-d81b2638-020e-4e89-839e-6e8034e89fe6.png"/>
+
+*
 
 ### <div id="핵심4">영화 등록</div>
 <img width="80%" src="https://user-images.githubusercontent.com/106221717/219864247-e2d2b6aa-a1db-44d2-8505-fda54aae129a.PNG"/>

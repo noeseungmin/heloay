@@ -2,9 +2,12 @@ package com.heloay.heloay.controller;
 
 import com.heloay.heloay.domain.Movie;
 import com.heloay.heloay.dto.MovieDto;
+import com.heloay.heloay.repository.CustomMovieRepository;
+import com.heloay.heloay.service.MovieRepositoryImpl;
 import com.heloay.heloay.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,13 +21,24 @@ import java.io.IOException;
 public class MovieController {
 
     private final MovieService movieService;
+    private final CustomMovieRepository customMovieRepository;
 
 
     @GetMapping
-    public String movie(Model model, @RequestParam(value = "page", defaultValue = "0") int page){
-        Page<Movie> paging = this.movieService.movieList(page);
-        model.addAttribute("paging", paging);
+    public String movie(String searchVal, Pageable pageable, Model model){
+        Page<MovieDto> results = customMovieRepository.selectMovieList(searchVal, pageable);
+        model.addAttribute("list", results);
+        model.addAttribute("maxPage", 5);
+        model.addAttribute("searchVal", searchVal);
+
+        pageModelPut(results, model);
         return "view/movie";
+    }
+    private void pageModelPut(Page<MovieDto> results, Model model){
+        model.addAttribute("totalCount", results.getTotalElements());
+        model.addAttribute("size", results.getPageable().getPageSize());
+        model.addAttribute("number", results.getPageable().getPageNumber());
+
     }
 
     @GetMapping("/{movieId}")

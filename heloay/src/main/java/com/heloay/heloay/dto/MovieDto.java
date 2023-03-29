@@ -1,16 +1,15 @@
 package com.heloay.heloay.dto;
 
 import com.heloay.heloay.domain.Movie;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.querydsl.core.annotations.QueryProjection;
+import lombok.*;
 
-@Getter
+import java.io.File;
+
+@Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MovieDto {
-    private String imgUrl;
-    private String imgName;
+    private Long id;
     private String title;
     private String content;
     private String genres;
@@ -21,8 +20,7 @@ public class MovieDto {
 
     public Movie toEntity() {
         return Movie.builder()
-                .imgName(imgName)
-                .imgUrl(imgUrl)
+                .id(id)
                 .title(title)
                 .content(content)
                 .genres(genres)
@@ -34,7 +32,8 @@ public class MovieDto {
     }
 
     @Builder
-    public MovieDto(String title, String content, String genres, String actor, String director, Integer runTime, String grade) {
+    public MovieDto(Long id, String title, String content, String genres, String actor, String director, Integer runTime, String grade) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.genres = genres;
@@ -42,5 +41,12 @@ public class MovieDto {
         this.director = director;
         this.runTime = runTime;
         this.grade = grade;
+    }
+    @QueryProjection
+    public MovieDto(Long id, String title, Integer runTime, String genres) {
+        this.id = id;
+        this.title = title;
+        this.runTime = runTime;
+        this.genres = genres;
     }
 }
